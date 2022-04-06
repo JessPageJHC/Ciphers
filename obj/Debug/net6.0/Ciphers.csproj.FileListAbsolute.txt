@@ -1,0 +1,15 @@
+C:\Users\fiend\Documents\Projects\C#\Ciphers\bin\Debug\net6.0\Ciphers.exe
+C:\Users\fiend\Documents\Projects\C#\Ciphers\bin\Debug\net6.0\Ciphers.deps.json
+C:\Users\fiend\Documents\Projects\C#\Ciphers\bin\Debug\net6.0\Ciphers.runtimeconfig.json
+C:\Users\fiend\Documents\Projects\C#\Ciphers\bin\Debug\net6.0\Ciphers.dll
+C:\Users\fiend\Documents\Projects\C#\Ciphers\bin\Debug\net6.0\ref\Ciphers.dll
+C:\Users\fiend\Documents\Projects\C#\Ciphers\bin\Debug\net6.0\Ciphers.pdb
+C:\Users\fiend\Documents\Projects\C#\Ciphers\obj\Debug\net6.0\Ciphers.csproj.AssemblyReference.cache
+C:\Users\fiend\Documents\Projects\C#\Ciphers\obj\Debug\net6.0\Ciphers.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fiend\Documents\Projects\C#\Ciphers\obj\Debug\net6.0\Ciphers.AssemblyInfoInputs.cache
+C:\Users\fiend\Documents\Projects\C#\Ciphers\obj\Debug\net6.0\Ciphers.AssemblyInfo.cs
+C:\Users\fiend\Documents\Projects\C#\Ciphers\obj\Debug\net6.0\Ciphers.csproj.CoreCompileInputs.cache
+C:\Users\fiend\Documents\Projects\C#\Ciphers\obj\Debug\net6.0\Ciphers.dll
+C:\Users\fiend\Documents\Projects\C#\Ciphers\obj\Debug\net6.0\ref\Ciphers.dll
+C:\Users\fiend\Documents\Projects\C#\Ciphers\obj\Debug\net6.0\Ciphers.pdb
+C:\Users\fiend\Documents\Projects\C#\Ciphers\obj\Debug\net6.0\Ciphers.genruntimeconfig.cache
