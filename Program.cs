@@ -10,10 +10,38 @@ class Program
             char[] buffer = message.ToCharArray();
             for (int i = 0; i < buffer.Length; i++)
             {
-                char letter = buffer[i];
+                bool upper = Char.IsUpper(buffer[i]);
+                char letter = Char.ToLower(buffer[i]);
                 if (Char.IsLetter(letter))
                 {
                     letter = (char)(letter + key);
+                    if (letter > 'z')
+                    {
+                        letter = (char)(letter - 26);
+                    }
+                    else if (letter < 'a')
+                    {
+                        letter = (char)(letter + 26);
+                    }
+                }
+                if (upper)
+                {
+                    letter = Char.ToUpper(letter);
+                }
+                buffer[i] = letter;
+            }
+            return new string(buffer);
+        }
+
+        public string Decode(string message, int key)
+        {
+            char[] buffer = message.ToCharArray();
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                char letter = Char.ToLower(buffer[i]);
+                if (Char.IsLetter(letter))
+                {
+                    letter = (char)(letter - key);
                     if (letter > 'z')
                     {
                         letter = (char)(letter - 26);
@@ -27,6 +55,11 @@ class Program
             }
             return new string(buffer);
         }
+    }
+
+    class Atbash
+    {
+
     }
 
     static void Main()
@@ -123,7 +156,7 @@ class Program
             {
                 if (cipher == 1)
                 {
-                    decodedMessage = "Not implemented yet.";
+                    decodedMessage = caesar.Decode(message, 1);
                 }
                 else if (cipher == 2)
                 {
@@ -165,29 +198,85 @@ class Program
                     decodedMessage = "Invalid cipher.";
                 }
             }
-
-            WriteLine(decodedMessage);
-            WriteLine("\nPress SPACE to decode/encode another message.");
-            WriteLine("Press ENTER to exit the program.");
-            selected = false;
-            CursorVisible = false;
-            while (!selected)
+            
+            if (cipher == 1)
             {
-                switch (ReadKey(true).Key)
+                int key = 1;
+                selected = false;
+                while (!selected)
                 {
-                    case ConsoleKey.Spacebar:
+                    Clear();
+                    WriteLine(decodedMessage);
+                    WriteLine("\nKey: " + key);
+                    WriteLine("Press UP/DOWN to change the key.");
+                    WriteLine("\nPress SPACE to decode/encode another message.");
+                    WriteLine("Press ENTER to exit the program.");
+                    selected = false;
+                    CursorVisible = false;
+                    switch (ReadKey(true).Key)
                     {
-                        selected = true;
-                        break;
+                        case ConsoleKey.UpArrow:
+                        {
+                            if (key < 25) { key++; }
+                            if (mode == 1)
+                            {
+                                decodedMessage = caesar.Decode(message, key);
+                            }
+                            else
+                            {
+                                decodedMessage = caesar.Encode(message, key);
+                            }
+                            break;
+                        }
+                        case ConsoleKey.DownArrow:
+                        {
+                            if (key > 1) { key--; }
+                            decodedMessage = caesar.Encode(message, key);
+                            break;
+                        }
+                        case ConsoleKey.Spacebar:
+                        {
+                            selected = true;
+                            break;
+                        }
+                        case ConsoleKey.Enter:
+                        {
+                            selected = true;
+                            repeatProgram = false;
+                            break;
+                        }
                     }
-                    case ConsoleKey.Enter:
+                }
+
+            }
+            else
+            {
+                WriteLine(decodedMessage);
+                WriteLine("\nPress SPACE to decode/encode another message.");
+                WriteLine("Press ENTER to exit the program.");
+                selected = false;
+                CursorVisible = false;
+                while (!selected)
+                {
+                    switch (ReadKey(true).Key)
                     {
-                        selected = true;
-                        repeatProgram = false;
-                        break;
+                        case ConsoleKey.Spacebar:
+                        {
+                            selected = true;
+                            break;
+                        }
+                        case ConsoleKey.Enter:
+                        {
+                            selected = true;
+                            repeatProgram = false;
+                            break;
+                        }
                     }
                 }
             }
         }
+
+        Clear();
+        WriteLine("Thanks for using this program.");
     }
 }
