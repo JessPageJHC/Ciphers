@@ -181,12 +181,14 @@ class Program
             }
             message = ReadLine();
 
+            CipherSelection:
             Clear();
             WriteLine("Select which cipher you would like to use.");
             WriteLine("   Caesar");
             WriteLine("   Atbash");
             WriteLine("   Binary");
             WriteLine("   Base64");
+            WriteLine("\nPress H for information about the selected cipher.");
             selection = 1;
             selected = false;
             int cipher = 0; // 1 = Caesar  2 = Atbash  3 = Binary  4 = Base64
@@ -211,6 +213,34 @@ class Program
                         selected = true;
                         cipher = selection;
                         break;
+                    }
+                    case ConsoleKey.H:
+                    {
+                        Clear();
+                        if (selection == 1)
+                        {
+                            WriteLine("Caesar Cipher:");
+                            WriteLine("The Caesar cipher is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter is replaced by a letter some fixed number of positions down the alphabet. For example, with a shift of 3, A would be replaced by D, B would become E, and so on.");
+                        }
+                        else if (selection == 2)
+                        {
+                            WriteLine("Atbash Cipher:");
+                            WriteLine("The Atbash cipher is a particular type of monoalphabetic cipher formed by taking the alphabet and mapping it to its reverse, so that the first letter becomes the last letter, the second letter becomes the second to last letter, and so on. For example, A becomes Z, B becomes Y, and so on.");
+                        }
+                        else if (selection == 3)
+                        {
+                            WriteLine("Binary:");
+                            WriteLine("The binary code is a way of representing sequences of letters using a two-symbol system, usually 0 and 1.");
+                        }
+                        else if (selection == 4)
+                        {
+                            WriteLine("Base 64:");
+                            WriteLine("Base 64 is an encoding method usually used in computer programming.");
+                        }
+                        CursorVisible = false;
+                        ReadKey();
+                        CursorVisible = true;
+                        goto CipherSelection;
                     }
                 }
             }
