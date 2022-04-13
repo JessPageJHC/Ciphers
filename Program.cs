@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using static System.Console;
 
 class Program
@@ -38,6 +39,7 @@ class Program
             char[] buffer = message.ToCharArray();
             for (int i = 0; i < buffer.Length; i++)
             {
+                bool upper = Char.IsUpper(buffer[i]);
                 char letter = Char.ToLower(buffer[i]);
                 if (Char.IsLetter(letter))
                 {
@@ -51,6 +53,10 @@ class Program
                         letter = (char)(letter + 26);
                     }
                 }
+                if (upper)
+                {
+                    letter = Char.ToUpper(letter);
+                }
                 buffer[i] = letter;
             }
             return new string(buffer);
@@ -59,7 +65,67 @@ class Program
 
     class Atbash
     {
+        public string GetAtbash(string s)
+        {
+            var charArray = s.ToCharArray();
 
+            for (int i = 0; i < charArray.Length; i++)
+            {
+                char c = charArray[i];
+
+                if (c >= 'a' && c <= 'z')
+                {
+                    charArray[i] = (char) (96 + (123 - c));
+                }
+
+                if (c >= 'A' && c <= 'Z')
+                {
+                    charArray[i] = (char) (64 + (91 - c));
+                }
+            }
+
+            return new String(charArray);
+        }
+    }
+
+    class Binary
+    {
+        public string Encode(string message)
+        {
+            StringBuilder sb = new StringBuilder();
+        
+            foreach (char c in message.ToCharArray())
+            {
+                sb.Append(Convert.ToString(c, 2).PadLeft(8, '0'));
+            }
+            return sb.ToString();
+        }
+
+        public string Decode(string message)
+        {
+            List<Byte> byteList = new List<Byte>();
+        
+            for (int i = 0; i < message.Length; i += 8)
+            {
+                byteList.Add(Convert.ToByte(message.Substring(i, 8), 2));
+            }
+            return Encoding.ASCII.GetString(byteList.ToArray());
+        }
+    }
+
+    class Base64
+    {
+        public string Encode(string message)
+        {
+            var valueBytes = Encoding.UTF8.GetBytes(message);
+            return Convert.ToBase64String(valueBytes);
+        }
+
+        public string Decode(string message)
+        {
+            var valueBytes = System.Convert.FromBase64String(message);
+            return Encoding.UTF8.GetString(valueBytes);
+        }
     }
 
     static void Main()
@@ -152,6 +218,9 @@ class Program
             Clear();
             string decodedMessage = "Default message";
             Caesar caesar = new Caesar();
+            Atbash atbash = new Atbash();
+            Binary binary = new Binary();
+            Base64 base64 = new Base64();
             if (mode == 1)
             {
                 if (cipher == 1)
@@ -160,15 +229,29 @@ class Program
                 }
                 else if (cipher == 2)
                 {
-                    decodedMessage = "Not implemented yet.";
+                    decodedMessage = atbash.GetAtbash(message);
                 }
                 else if (cipher == 3)
                 {
-                    decodedMessage = "Not implemented yet.";
+                    try
+                    {
+                        decodedMessage = binary.Decode(message);
+                    }
+                    catch
+                    {
+                        decodedMessage = "Invalid binary message.\n(Binary messages can only consist of 0 and 1!)";
+                    }
                 }
                 else if (cipher == 4)
                 {
-                    decodedMessage = "Not implemented yet.";
+                    try
+                    {
+                        decodedMessage = base64.Decode(message);
+                    }
+                    catch
+                    {
+                        decodedMessage = "Invalid Base 64 message.";
+                    }
                 }
                 else
                 {
@@ -183,15 +266,15 @@ class Program
                 }
                 else if (cipher == 2)
                 {
-                    decodedMessage = "Not implemented yet.";
+                    decodedMessage = atbash.GetAtbash(message);
                 }
                 else if (cipher == 3)
                 {
-                    decodedMessage = "Not implemented yet.";
+                    decodedMessage = binary.Encode(message);
                 }
                 else if (cipher == 4)
                 {
-                    decodedMessage = "Not implemented yet.";
+                    decodedMessage = base64.Encode(message);
                 }
                 else
                 {
