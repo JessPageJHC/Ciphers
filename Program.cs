@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using static System.Console;
 
 class Program
@@ -133,6 +132,16 @@ class Program
         OutputEncoding = System.Text.Encoding.UTF8;
         bool repeatProgram = true;
 
+        Clear();
+        CursorVisible = false;
+        
+        WriteLine("== Welcome to the Cipher Translator ==\n");
+        WriteLine("In this program, you can translate any message you want into a cipher or out of a cipher.");
+        WriteLine("There are four different ciphers to choose from as of now: Caesar, Atbash, Binary and Base64.");
+        WriteLine("The program is controlled mostly with the arrow keys and ENTER.");
+        WriteLine("\nPress any key to begin.");
+        ReadKey();
+
         while (repeatProgram)
         {
             Clear();
@@ -170,7 +179,7 @@ class Program
             }
 
             Clear();
-            string message;
+            string? message;
             if (mode == 1)
             {
                 WriteLine("Enter the message you would like to decode.");
@@ -180,6 +189,10 @@ class Program
                 WriteLine("Enter the message you would like to encode.");
             }
             message = ReadLine();
+            if (message is null)
+            {
+                message = "";
+            }
 
             CipherSelection:
             Clear();
